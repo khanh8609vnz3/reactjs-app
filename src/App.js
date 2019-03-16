@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import "./App.css";
 
 class App extends Component {
@@ -20,46 +19,55 @@ class Header extends Component {
     super(props);
     this.state = {
       date: new Date(),
-      name: "Khanh"
+      name: "Khanh",
+      isLogin: false
     };
+
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
-  componentDidMount() {
-    this.timerID = setInterval(() => {
-      this.tick();
-      console.log(this.state);
-    }, 10000);
+  login() {
+    this.setState({ isLogin: true });
   }
 
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-
-  tick() {
-    this.setState({ date: new Date() });
-  }
-
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
-  };
-
-  changeName(e) {
-    console.log(this);
+  logout() {
+    this.setState({ isLogin: false });
   }
 
   render() {
+    const isLogin = this.state.isLogin;
+    // let button;
+    // if (isLogin) {
+    //   button = (
+    //     <div>
+    //       <Button onClick={this.logout}>Logout</Button>
+    //     </div>
+    //   );
+    // } else {
+    //   button = (
+    //     <div>
+    //       <Button onClick={this.login}>Login</Button>
+    //     </div>
+    //   );
+    // }
+
     return (
       <div>
-        <h3>{this.state.date.toLocaleTimeString()}</h3>
-        <h4>{this.state.name}</h4>
-        <TextField
-          id="standard-name"
-          label="Name"
-          value={this.state.name}
-          onChange={this.handleChange("name")}
-          margin="normal"
-        />
-        <Button onClick={event => this.changeName(event)}>Change name</Button>
+        {/* {isLogin && <h3>Da login rui nha</h3>}
+        {!isLogin && <h3>Chua login nha</h3>} */}
+        {isLogin ? (
+          <div>
+            <h3>Da login rui nha</h3>
+            <Button onClick={this.logout}>Logout</Button>
+          </div>
+        ) : (
+          <div>
+            <h3>Chua login nha</h3>
+            <Button onClick={this.login}>Login</Button>
+          </div>
+        )}
+        {/* {button} */}
       </div>
     );
   }
