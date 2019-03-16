@@ -27,7 +27,14 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.blue {
+  background: lightcyan;
+  text-align: center;
+  margin: 10px
 }
