@@ -37,25 +37,8 @@ class Header extends Component {
 
   render() {
     const isLogin = this.state.isLogin;
-    // let button;
-    // if (isLogin) {
-    //   button = (
-    //     <div>
-    //       <Button onClick={this.logout}>Logout</Button>
-    //     </div>
-    //   );
-    // } else {
-    //   button = (
-    //     <div>
-    //       <Button onClick={this.login}>Login</Button>
-    //     </div>
-    //   );
-    // }
-
     return (
       <div>
-        {/* {isLogin && <h3>Da login rui nha</h3>}
-        {!isLogin && <h3>Chua login nha</h3>} */}
         {isLogin ? (
           <div>
             <h3>Da login rui nha</h3>
@@ -67,7 +50,6 @@ class Header extends Component {
             <Button onClick={this.login}>Login</Button>
           </div>
         )}
-        {/* {button} */}
       </div>
     );
   }
@@ -98,17 +80,20 @@ class Content extends Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.state.data.map(item => (
-          <div key={item.id} className="blue">
-            <span>{item.id} </span>
-            <span>{item.age} </span>
-            <span>{item.name} </span>
-          </div>
-        ))}
-      </div>
-    );
+    const data = this.state.data;
+    let listData;
+
+    listData = data.map(item => {
+      return (
+        <div key={item.id} className="blue">
+          <span>{item.id} </span>
+          <span>{item.age} </span>
+          <span>{item.name} </span>
+        </div>
+      );
+    });
+
+    return <div>{listData}</div>;
   }
 }
 
