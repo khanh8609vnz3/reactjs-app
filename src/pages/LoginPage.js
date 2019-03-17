@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import TextField from "@material-ui/core/TextField";
 
 class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "Khanh",
-      age: 24
+      formData: {
+        name: "Khanh",
+        age: 24,
+        job: "No Job"
+      }
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,36 +20,49 @@ class LoginPage extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(event);
+    alert(JSON.stringify(this.state.formData));
   }
 
   render() {
-    const data = this.state;
+    const data = this.state.formData;
 
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <TextField
-            id="outlined-name"
-            label="Name"
+      <div id="login-page">
+        <form className="login-form" onSubmit={this.handleSubmit}>
+          <input
+            type="text"
+            name="name"
+            id="inputName"
+            className="form-control"
             value={data.name}
             onChange={e => this.handleChange("name", e)}
-            margin="normal"
-            variant="outlined"
           />
-          <TextField
-            id="outlined-age"
-            label="Age"
+          <input
+            type="text"
+            name="age"
+            id="inputAge"
+            className="form-control"
             value={data.age}
             onChange={e => this.handleChange("age", e)}
-            margin="normal"
-            variant="outlined"
-            type="number"
           />
-          <h3>
-            My name is {data.name} and I'm {data.age} years old
-          </h3>
-          <input type="submit" value="Submit" />
+          <select
+            name="job"
+            id="selectJob"
+            className="form-control"
+            onChange={e => this.handleChange("job", e)}
+            value={data.job}
+          >
+            <option value="No Job">No Job</option>
+            <option value="IT">IT</option>
+            <option value="Osin">Osin</option>
+          </select>
+          <h5>
+            My name is {data.name} and I'm {data.age} years old. I'm a{" "}
+            {data.job}.
+          </h5>
+          <button type="submit" className="btn btn-success">
+            Submit
+          </button>
         </form>
       </div>
     );
